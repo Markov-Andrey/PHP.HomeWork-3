@@ -63,5 +63,21 @@
   add(negativeNum(5));
   task('end');
 
+  task('start');
+  condition('Сделайте функцию getDigitsSum (digit - это цифра), которая параметром
+  принимает целое число и возвращает сумму его цифр.');
+  function getDigitsSum($a){
+    $a = (string)$a;
+    $sum = 0;
+    for ($i = 0; $i < strlen($a); $i++){
+      $sum += $a[$i];
+    }
+    add('Число: '.$a.'; Cумма: '.$sum);
+  }
+  getDigitsSum(55555);
+  getDigitsSum(999);
+  getDigitsSum(666);
+  task('end');
+
   include('./src/footer.php');
 ?>
