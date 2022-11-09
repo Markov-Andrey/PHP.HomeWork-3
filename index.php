@@ -69,14 +69,19 @@
   function getDigitsSum($a){
     $a = (string)$a;
     $sum = 0;
-    for ($i = 0; $i < strlen($a); $i++){
-      $sum += $a[$i];
-    }
-    add('Число: '.$a.'; Cумма: '.$sum);
+    for ($i = 0; $i < strlen($a); $i++) $sum += $a[$i];
+    return $sum;
   }
-  getDigitsSum(55555);
-  getDigitsSum(999);
-  getDigitsSum(666);
+  add (getDigitsSum(55555));
+  add (getDigitsSum(999));
+  add (getDigitsSum(666));
+  task('end');
+
+  task('start');
+  condition('Сделайте функцию isEven() (even - это четный), которая параметром
+  принимает целое число и проверяет: четное оно или нет. Если четное - пусть
+  функция возвращает true, если нечетное - false.');
+  
   task('end');
 
   include('./src/footer.php');

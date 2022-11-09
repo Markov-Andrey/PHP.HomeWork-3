@@ -49,3 +49,12 @@ h1{
 p{
   font-size: 20px;
 }
+.col-10{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  border: 1px solid black;
+}
+.item{
+  align-self: center;
+  justify-self: center;
+}
