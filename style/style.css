@@ -53,6 +53,7 @@ p{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   border: 1px solid black;
+  margin: 25px 0;
 }
 .item{
   align-self: center;

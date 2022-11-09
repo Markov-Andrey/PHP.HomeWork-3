@@ -78,9 +78,39 @@
   task('end');
 
   task('start');
+  condition('Найдите все года от 1 до 2020, сумма цифр которых равна 13. Для этого
+  используйте вспомогательную функцию getDigitsSum из предыдущей задачи.');
+  function yearSum13($a, $b){
+    $arr = [];
+    for ($a; $a <= $b; $a++){
+      if (getDigitsSum($a) == 13) array_push($arr, $a);
+    }
+    add($a." - ".$b);
+    echo '<div class="col-10">';
+    for($i = 0; $i < count($arr); $i++){
+      echo ("<p class='item'>{$arr[$i]}</p>");
+    }
+    echo '</div>';
+  }
+  yearSum13(1, 2020);
+  yearSum13(2020, 3020);
+  task('end');
+
+  task('start');
   condition('Сделайте функцию isEven() (even - это четный), которая параметром
   принимает целое число и проверяет: четное оно или нет. Если четное - пусть
   функция возвращает true, если нечетное - false.');
+  function isEven($a){
+    return (!($a % 2)) ? add($a." - true") : add($a." - false");
+  }
+  echo '<div class="col-10">';
+  for ($i = 1; $i < 100; $i++) isEven($i);
+  echo '</div>';
+  task('end');
+  
+  task('start');
+  condition('Сделайте функцию, которая принимает строку на русском языке, а
+  возвращает ее транслит.');
   
   task('end');
 
