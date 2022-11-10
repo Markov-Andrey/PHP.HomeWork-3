@@ -74,6 +74,7 @@
     $a = (string)$a;
     $sum = 0;
     for ($i = 0; $i < strlen($a); $i++) $sum += $a[$i];
+    
     return $sum;
   }
   add (getDigitsSum(55555));
@@ -137,6 +138,7 @@
       'Э' => 'E',    'Ю' => 'Yu',   'Я' => 'Ya',
 	  );
     $value = strtr($value,$converter);
+
     return $value;
   }
   add("Марков Андрей Валерьевич");
@@ -207,11 +209,41 @@
   condition('Рассчитать скорость движения машины и выведите её в удобочитаемом
   виде. Осуществить возможность вывода в км/ч, м/c. Представить решение
   задачи с помощью одной функции.');
-  function speed($distance, $time, $type){
+  function speed($distance, $time, $type)
+  {
     $speed = $distance / $time;
+
     return "$distance пройденные за $time равно $speed $type";
   }
   add(speed(1000, 10, 'км/ч'));
+  task('end');
+
+  task('start');
+  condition('Даны 2 слова, определить можно ли из 1ого слова составить 2ое, при
+  условии что каждую букву из строки 1 можно использовать только один раз.');
+  function wordPicker($word1, $word2)
+  {
+    $arrWord1 = [];
+    $arrWord2 = [];
+    //разделим оба слова на массивы, такакя конструкция позволяет отловить кириллические символы
+    for ($i = 0; $i < mb_strlen($word1, 'UTF-8'); $i++){
+      array_push($arrWord1, mb_substr($word1, $i, 1, "UTF-8"));
+    }
+    for ($i = 0; $i < mb_strlen($word2, 'UTF-8'); $i++){
+      array_push($arrWord2, mb_substr($word2, $i, 1, "UTF-8"));
+    }
+    //
+    $resArr = array_diff($arrWord2, $arrWord1);
+    if (count($resArr) === 0){
+      add("Ура! Из слова \"{$word1}\" можно составить \"{$word2}\"!");
+    } else {
+      add("Увы! Из слова \"{$word1}\" нельзя составить \"{$word2}\"!");
+    }
+  }
+  wordPicker('караганда','ара');
+  wordPicker('асфальт','кукуруза');
+  wordPicker('Pen-Pineapple-Apple-Pen','Apple');
+  wordPicker('Apple','Pen-Pineapple-Apple-Pen');
   task('end');
 
   include('./src/footer.php');
