@@ -221,17 +221,21 @@
   task('start');
   condition('Даны 2 слова, определить можно ли из 1ого слова составить 2ое, при
   условии что каждую букву из строки 1 можно использовать только один раз.');
+  //функция превращения слова в массив (возможно использование кириллицы)
+  function wordToArray($word, $arrWord)
+  {
+    for ($i = 0; $i < mb_strlen($word, 'UTF-8'); $i++){
+      array_push($arrWord, mb_substr($word, $i, 1, "UTF-8"));
+    }
+  }
+
   function wordPicker($word1, $word2)
   {
     $arrWord1 = [];
     $arrWord2 = [];
     //разделим оба слова на массивы, такакя конструкция позволяет отловить кириллические символы
-    for ($i = 0; $i < mb_strlen($word1, 'UTF-8'); $i++){
-      array_push($arrWord1, mb_substr($word1, $i, 1, "UTF-8"));
-    }
-    for ($i = 0; $i < mb_strlen($word2, 'UTF-8'); $i++){
-      array_push($arrWord2, mb_substr($word2, $i, 1, "UTF-8"));
-    }
+    wordToArray($word1, $arrWord1);
+    wordToArray($word2, $arrWord2);
     //
     $resArr = array_diff($arrWord2, $arrWord1);
     if (count($resArr) === 0){
@@ -244,6 +248,39 @@
   wordPicker('асфальт','кукуруза');
   wordPicker('Pen-Pineapple-Apple-Pen','Apple');
   wordPicker('Apple','Pen-Pineapple-Apple-Pen');
+  task('end');
+
+  task('start');
+  condition('Палиндромом называют последовательность символов, которая читается
+  как слева направо, так и справа налево. Напишите функцию по определению
+  палиндрома по переданному параметру.');
+  function palindrome($word)
+  {
+    $arrWord1 = [];
+    $arrWord2 = [];
+    $flag = false;
+    for ($i = 0; $i < mb_strlen($word, 'UTF-8'); $i++){
+      array_push($arrWord1, mb_substr($word, $i, 1, "UTF-8"));
+    }
+    $arrWord2 = array_reverse($arrWord1);
+    for($i = 0; $i < count($arrWord1); $i++){
+      if($arrWord1[$i] == $arrWord2[$i]) {
+        $flag = true;
+      } else {
+        $flag = false;
+      }
+    }
+    if ($flag){
+      add("Ух ты! \"{$word}\" является палиндромом");
+    } else {
+      add("О нет! \"{$word}\" не является палиндромом");
+    }
+  }
+  palindrome('доход');
+  palindrome('шалаш');
+  palindrome('казак');
+  palindrome('арбуз у зубра');
+  palindrome('палиндром');
   task('end');
 
   include('./src/footer.php');
