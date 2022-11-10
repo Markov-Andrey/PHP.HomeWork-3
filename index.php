@@ -203,5 +203,16 @@
   sumRecursion(mt_rand(999,99999999999));
   task('end');
 
+  task('start');
+  condition('Рассчитать скорость движения машины и выведите её в удобочитаемом
+  виде. Осуществить возможность вывода в км/ч, м/c. Представить решение
+  задачи с помощью одной функции.');
+  function speed($distance, $time, $type){
+    $speed = $distance / $time;
+    return "$distance пройденные за $time равно $speed $type";
+  }
+  add(speed(1000, 10, 'км/ч'));
+  task('end');
+
   include('./src/footer.php');
 ?>
