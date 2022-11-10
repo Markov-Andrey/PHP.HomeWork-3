@@ -1,5 +1,6 @@
 <?php
-  $htmlTitle = 'HomeWork PHP#2';
+  $htmlTitle = 'HomeWork PHP#3';
+  $htmlTheme = 'Функции';
   include('./src/header.php');
   include('./src/function.php');
 
@@ -181,7 +182,25 @@
   condition('Дано число. Сложите его цифры. Если сумма получилась более 9-ти,
   опять сложите его цифры. И так, пока сумма не станет однозначным числом
   (9 и менее).');
-  
+  function sumRecursion($a)
+  {
+    if ($a > 9){
+      add ($a." преобразовано в ");
+      $a = (string)$a;
+      $sum = 0;
+      for ($i = 0; $i < strlen($a); $i++){
+        $sum += (int)$a[$i];
+      }
+      $a = $sum;
+      sumRecursion($a);
+    } else {
+      add ($a);
+      echo "<br>";
+    }
+  }
+  sumRecursion(mt_rand(999,99999999999));
+  sumRecursion(mt_rand(999,99999999999));
+  sumRecursion(mt_rand(999,99999999999));
   task('end');
 
   include('./src/footer.php');
