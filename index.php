@@ -283,5 +283,19 @@
   palindrome('палиндром');
   task('end');
 
+  task('start');
+  condition('Создание функцию создания таблицы умножения в HTML-документе в
+  виде таблицы с использованием соотв. тегов.');
+  echo "<table>";
+  for($a = 1; $a <= 10; $a++){
+    echo "<tr>";
+    for ($b = 1; $b <= 10; $b++){
+      echo "<td>$a * $b = ".$a * $b."</td>";
+    }
+    echo "</tr>";
+  }
+  echo "</table>";
+  task('end');
+
   include('./src/footer.php');
 ?>
