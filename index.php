@@ -170,7 +170,7 @@
   function arrRecursion ($n)
   {
     if(current($n)){
-      add(current($n));
+      echo ("<p class='item'>".current($n)."</p>");
       next($n);
       arrRecursion($n);
     }
