@@ -258,22 +258,34 @@
   {
     $arrWord1 = [];
     $arrWord2 = [];
-    $flag = false;
+    $flag = true;
+    //слово в массив
     for ($i = 0; $i < mb_strlen($word, 'UTF-8'); $i++){
       array_push($arrWord1, mb_substr($word, $i, 1, "UTF-8"));
     }
+    //очистить выражение от "лишних" символов
+    for ($i = 0; $i < count($arrWord1); $i++){
+      switch($arrWord1[$i]){
+        case " ":
+        case ",":
+        case  ",":
+        case  ".":
+        case  "!":
+        case  "?":
+          array_splice($arrWord1, $i, 1);
+      }
+    }
     $arrWord2 = array_reverse($arrWord1);
+    //проверка: любое отличие переключает "флаг" на false
     for($i = 0; $i < count($arrWord1); $i++){
-      if($arrWord1[$i] == $arrWord2[$i]) {
-        $flag = true;
-      } else {
+      if($arrWord1[$i] !== $arrWord2[$i]) {
         $flag = false;
       }
     }
     if ($flag){
-      add("Ух ты! \"{$word}\" является палиндромом");
+      add("ДА, <b>\"{$word}\"</b> является палиндромом!");
     } else {
-      add("О нет! \"{$word}\" не является палиндромом");
+      add("НЕТ, <b>\"{$word}\"</b> НЕ является палиндромом...");
     }
   }
   palindrome('доход');
@@ -281,6 +293,9 @@
   palindrome('казак');
   palindrome('арбуз у зубра');
   palindrome('палиндром');
+  palindrome('а роза упала на лапу азора');
+  palindrome('лом о смокинги гни, комсомол!');
+  palindrome('муза, ранясь шилом опыта, ты помолишься на разум.');
   task('end');
 
   task('start');
