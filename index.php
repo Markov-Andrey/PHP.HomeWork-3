@@ -273,6 +273,7 @@
         case  "!":
         case  "?":
           array_splice($arrWord1, $i, 1);
+          $i = 0;
       }
     }
     $arrWord2 = array_reverse($arrWord1);
@@ -310,6 +311,19 @@
     echo "</tr>";
   }
   echo "</table>";
+  task('end');
+
+  task('start');
+  condition('Дана строка с текстом. Напишите функцию определения самого длинного
+  слова.');
+  function longLongWord ($str)
+  {
+    $arrStr = explode(' ', $str);
+    //$longWord = $arrStr
+    //mb_strlen()
+    var_dump($arrStr);
+  }
+  longLongWord('Ахалай махалай');
   task('end');
 
   include('./src/footer.php');
