@@ -319,11 +319,26 @@
   function longLongWord ($str)
   {
     $arrStr = explode(' ', $str);
-    //$longWord = $arrStr
-    //mb_strlen()
-    var_dump($arrStr);
+    $longWord = $arrStr[0];
+    foreach ($arrStr as $word){
+      if (mb_strlen($longWord) < mb_strlen($word)){
+        $longWord = $word;
+      }
+    }
+    return add("$str. <b>Самое длинное слово - $longWord</b>");
   }
-  longLongWord('Ахалай махалай');
+  //слова с одинаковой длинной к сожалению не записываются
+  longLongWord('1. Ахалай махалай');
+  longLongWord('2.1. When Mr. Bilbo Baggins of 
+    Bag End announced that he would shortly be 
+    celebrating his eleventy-first birthday with 
+    a party of special magnificence, there was 
+    much talk and excitement in Hobbiton');
+  longLongWord('2.2. Когда господин Бильбо Бэггинс из 
+  Котомки объявил, что намерен в скором времени 
+  отметить сто одиннадцатый день рождения и устроить 
+  по этому поводу особо пышное торжество, – 
+  Хоббитон загудел и заволновался');
   task('end');
 
   include('./src/footer.php');
