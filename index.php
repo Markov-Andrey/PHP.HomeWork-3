@@ -382,24 +382,49 @@
   condition('Напишите функцию, которая разбивает длинную строку тегами br так,
   чтобы длина каждой подстроки была не более N символов. Новая подстрока
   не должна начинаться с пробела');
-  function strLenght($a)
+  $str = "
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor ornare dui, eu tempor velit laoreet et. Quisque mollis, diam vel mattis fringilla, libero lectus sollicitudin dui, ut venenatis elit libero et nunc. Nam in nisl euismod, mollis nisl sed, pharetra lorem. Pellentesque ornare sit amet sapien sed faucibus. Nam volutpat cursus tristique. Ut et metus ut libero commodo vestibulum id eu justo. Aliquam erat volutpat. Vivamus nec commodo nulla. Integer mi nisi, ultricies in ultricies ut, porttitor sed tellus. In sagittis tempor nibh, non congue augue pellentesque quis. Duis rhoncus diam vel mollis lacinia. Nulla euismod tincidunt arcu, fermentum faucibus ipsum ultrices a.
+  Integer vitae justo volutpat, viverra nunc auctor, vestibulum nisl. Nunc in nulla lorem. Pellentesque congue in turpis at scelerisque. Nam vitae felis et enim finibus euismod. Aliquam ut diam non dui fringilla egestas sed a orci. Cras feugiat tortor mauris, eu tristique quam ultrices nec. Nunc et sollicitudin velit. Aenean congue pretium libero vitae blandit. Morbi vitae mattis turpis. Morbi posuere nulla sed dolor luctus egestas. Donec euismod massa a enim bibendum mollis. Praesent volutpat massa at neque rhoncus, in semper odio accumsan.
+  Cras ornare est neque, non ultricies lorem interdum nec. Nullam scelerisque porttitor leo, rhoncus eleifend dui maximus eget. Maecenas a condimentum augue. Proin metus justo, tempor et malesuada at, volutpat vel elit. Donec ac urna sed odio sodales pulvinar. Donec arcu justo, ultrices eu vestibulum nec, consectetur et orci. In dictum purus diam, non pulvinar leo mattis at. Aenean eu pharetra diam. Pellentesque tellus orci, laoreet sit amet mollis consectetur, commodo nec dui. Curabitur ac sapien venenatis, pretium arcu ac, hendrerit ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+  ";
+  //wordwrap
+  $strLenght1 = function ($a) use ($str)
   {
-      $str = "
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor ornare dui, eu tempor velit laoreet et. Quisque mollis, diam vel mattis fringilla, libero lectus sollicitudin dui, ut venenatis elit libero et nunc. Nam in nisl euismod, mollis nisl sed, pharetra lorem. Pellentesque ornare sit amet sapien sed faucibus. Nam volutpat cursus tristique. Ut et metus ut libero commodo vestibulum id eu justo. Aliquam erat volutpat. Vivamus nec commodo nulla. Integer mi nisi, ultricies in ultricies ut, porttitor sed tellus. In sagittis tempor nibh, non congue augue pellentesque quis. Duis rhoncus diam vel mollis lacinia. Nulla euismod tincidunt arcu, fermentum faucibus ipsum ultrices a.
-      Integer vitae justo volutpat, viverra nunc auctor, vestibulum nisl. Nunc in nulla lorem. Pellentesque congue in turpis at scelerisque. Nam vitae felis et enim finibus euismod. Aliquam ut diam non dui fringilla egestas sed a orci. Cras feugiat tortor mauris, eu tristique quam ultrices nec. Nunc et sollicitudin velit. Aenean congue pretium libero vitae blandit. Morbi vitae mattis turpis. Morbi posuere nulla sed dolor luctus egestas. Donec euismod massa a enim bibendum mollis. Praesent volutpat massa at neque rhoncus, in semper odio accumsan.
-      Cras ornare est neque, non ultricies lorem interdum nec. Nullam scelerisque porttitor leo, rhoncus eleifend dui maximus eget. Maecenas a condimentum augue. Proin metus justo, tempor et malesuada at, volutpat vel elit. Donec ac urna sed odio sodales pulvinar. Donec arcu justo, ultrices eu vestibulum nec, consectetur et orci. In dictum purus diam, non pulvinar leo mattis at. Aenean eu pharetra diam. Pellentesque tellus orci, laoreet sit amet mollis consectetur, commodo nec dui. Curabitur ac sapien venenatis, pretium arcu ac, hendrerit ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      ";
-      for ($i = 0; $i < strlen($str); $i++) { 
-          if (strlen($str) > $a) {
-              $str = wordwrap($str, $a, '<br>', true);
-          }
+    $str = wordwrap($str, $a, '<br>');
+    add($str);
+    add("&nbsp;");
+  };
+  $strLenght1(125);
+
+  //chunk_split
+  $strLenght2 = function ($a) use ($str)
+  {
+    $str = chunk_split($str, $a, '<br>');
+    add($str);
+    add("&nbsp;");
+  };
+  $strLenght2(125);
+
+  //manual
+  $strLenght3 = function ($a) use ($str)
+  {
+    $strArr = explode(' ', $str);
+    $sum = 0;
+    echo ("<p>");
+    for ($i = 0; $i < count($strArr); $i++){
+      $sum += (mb_strlen($strArr[$i]));
+      if($sum < $a){
+        $sum += mb_strlen($strArr[$i]) + 1;
+        echo ($strArr[$i]." ");
+      } else {
+        echo ($strArr[$i]."<br>");
+        $sum = 0;
       }
-      add($str);
-      add("&nbsp;");
-  }
-  strLenght(150);
-  strLenght(75);
-  strLenght(150);
+    }
+    echo ("</p>");
+  };
+  $strLenght3(125);
+
   task('end');
 
   include('./src/footer.php');
